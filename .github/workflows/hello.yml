@@ -19,8 +19,8 @@ jobs:
           echo "This computer is:"
           uname -a
 
-      - name: This step fails on purpose
-        run: cat this-file-does-not-exist.txt
+      - name: Now it works
+        run: cat README.md
 
       - name: Will this step run?
         run: echo "If you can read this, I ran."
