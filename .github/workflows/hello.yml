@@ -12,15 +12,22 @@ jobs:
       - name: Greet the world
         run: echo "Hello from GitHub Actions!"
 
-      - name: Show me the machine
-        run: |
-          echo "Today's date is:"
-          date
-          echo "This computer is:"
-          uname -a
+      - name: Look around BEFORE checkout
+        run: ls -la
 
-      - name: Now it works
+      - name: Copy my repo onto this machine
+        uses: actions/checkout@v4
+
+      - name: Look around AFTER checkout
+        run: ls -la
+
+      - name: Read the README
         run: cat README.md
 
-      - name: Will this step run?
-        run: echo "If you can read this, I ran."
+      - name: Quality check - README must not be empty
+        run: |
+          if [ ! -s README.md ]; then
+            echo "README.md is missing or empty"
+            exit 1
+          fi
+          echo "README.md exists and has content"
